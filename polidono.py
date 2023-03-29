@@ -26,7 +26,7 @@ def classify_tweet(text):
     clf = MultinomialNB()
     clf.fit(X, [0])
     
-    # category prediction
+    # for each item in the classification dict, adjust probability of specific category if that text is found in the tweet text
     max_prob = -1
     category = None
     for cat, keywords in categories.items():
@@ -47,8 +47,15 @@ def print_tweet_subject(tweet):
     print(f'Tweet: {tweet.text}')
     print(f'Subject: {subject}\n')
 
+# get ONLY tweets in the last X minutes from specified users
+users = ['alamoAlerts_003', 'alamoAlerts_004']
+for user in users:  
+    tweets = api.user_timeline(screen_name='alamoAlerts_003', count=3)
+    for tweet in tweets:
+        print_tweet_subject(tweet)
 
-query = 'something'
-tweets = api.search_tweets(query, count=10)
-for tweet in tweets:
-    print_tweet_subject(tweet)
+        # if certain subject is detected, find relevant political donations for companies / groups related to that
+
+        # generate tweet content
+
+        # reply to detected tweet
